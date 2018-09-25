@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
+import OrbitControls from '../../utils/OrbitControls.js'
 
 let scene, camera, renderer, controls, mesh, line;
+let width = 800;
+let height = 800;
 export default class App extends Component {
   constructor(props) {
     super(props)
     this.init = this.init.bind(this)
+    this.addCamera = this.addCamera.bind(this)
+    this.addLight = this.addLight.bind(this)
   }
 
   componentDidMount() {
@@ -16,10 +21,11 @@ export default class App extends Component {
     scene = new  THREE.Scene();
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize( 800, 800);
-    scene.background = new THREE.Color(0xeeeeee);
+    let color = new THREE.Color();
+    scene.background = new THREE.Color();
     document.getElementById('3d-rendering').appendChild( renderer.domElement );
-    addCamera();
-    addLight();
+    this.addCamera();
+    this.addLight();
   }
 
   addCamera() {
